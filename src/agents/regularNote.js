@@ -16,7 +16,7 @@ class RegularNote {
          * @type {OpenAi}
          * @private
          */
-        this.openAi = new OpenAi({apiKey: "sk-proj-5oahx0JP4BmG6CwBt3saT3BlbkFJEQvz5siuvSpH3r8qYDwq"});
+        this.openAi = new OpenAi({apiKey: ""});
 
         /**
          * @type {NoteCreator}
@@ -101,5 +101,16 @@ class RegularNote {
         return finalNote;
     }
 }
+
+const newNote = new RegularNote({
+    obsidianPath: '/home/gir/Documents/obsidian/GiR',
+});
+newNote.run({
+    title: 'New Note',
+    link: 'none',
+    image: 'https://i.ytimg.com/vi/2utAfvGAbgg/maxresdefault.jpg',
+    noteToExtend: 'This is an existing note content.',
+    pages: ['Page 1', 'Page 2'],
+});
 
 module.exports = RegularNote;
