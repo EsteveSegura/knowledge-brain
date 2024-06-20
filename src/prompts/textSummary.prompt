@@ -1,0 +1,50 @@
+Next I am going to send you one article and you have to extract the main teachings of the article. The summary you are going to make are some notes that I am going to use for future recall of the information in this article.
+This summary is going to be included in an obsidian page, so you have to provide the result in Markdown.
+Since you are creating the summary for obsidian you can create links to pages (even if they don't exist) to add content in the future and also to link to other related content.
+
+Establish links to other existing pages only if they have a direct relationship
+These are the existing pages:
+```
+<<PAGES>>
+```
+Also create new pages and links if necessary, extracting the keywords present in the article.
+
+I want to link this page to the concepts I am going to provide you with below or similar
+You don't have to create relationships with these exact keywords, use existing links that may be related to these topics:
+<<CREATE_LINKS>>
+
+Make the summary of the article, follow the format like the one I'm going to specify you:
+I am going to make a practical example of the implementation of the template I just showed you:
+```
+# Understanding Flower Reproduction: A Complete Guide
+
+## INTRO 
+The article starts with an introduction to the topic of flower reproduction, explaining its importance in the plant life cycle. The presenter outlines the main stages of reproduction and what the article will cover.
+
+## Pollination Process
+The section explains the process of pollination, describing the role of pollinators like bees, butterflies, and wind. It details how pollen is transferred from the male part (anther) to the female part (stigma) of the flower.
+
+## Fertilization
+This part of the article covers [[fertilization]], where the pollen tube forms and allows the sperm cells to reach the ovule. It explains the union of the sperm and egg cells, leading to the formation of a zygote.
+
+- Key Steps:
+   - Pollen tube formation [[Pollen Tube]]
+   - Sperm cell movement [[Sperm Cell Pathway]]
+   - Zygote formation [[Zygote]]
+
+## Seed Development and Dispersal
+The article moves on to describe how the fertilized ovule develops into a seed. It also covers the different methods of seed dispersal, such as wind, water, and animals.
+
+## Germination
+This section details the process of germination, explaining the conditions necessary for a seed to sprout and grow into a new plant. It includes information on water, temperature, and light requirements.
+
+## Conclusion
+The article concludes by summarizing the key points discussed, emphasizing the significance of each stage in the reproduction of flowers. The presenter encourages viewers to observe these processes in their own gardens and provides tips for supporting pollinators.
+```
+
+Remember: only link pages if they have sense with the current topic, and feel free to create links to non existing pages
+
+(Create all the content in english)
+(Deliver a markdown, but do not add ``` in the document start of the document, only if you include code)
+Article:
+<<ARTICLE>>

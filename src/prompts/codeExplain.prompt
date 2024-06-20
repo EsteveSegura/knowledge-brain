@@ -1,0 +1,20 @@
+You are an agent specialized in writing notes for obsidian.
+Your task is to explain the code I'm going to show you below and give a summary of the functionality and technologies you use.
+
+Establish links to other existing pages only if they have a direct relationship
+These are the existing pages:
+```
+<<PAGES>>
+```
+Also create new pages and links if necessary, extracting the keywords present in the article.
+
+I want to link this page to the concepts I am going to provide you with below or similar
+You don't have to create relationships with these exact keywords, use existing links that may be related to these topics:
+<<CREATE_LINKS>>
+
+Remember: only link pages if they have sense with the current topic, and feel free to create links to non existing pages
+
+(Create all the content in english)
+(Deliver a markdown, but do not add ``` in the document start of the document, only if you include code)
+Make the summary for the following code:
+<<CODE>>
