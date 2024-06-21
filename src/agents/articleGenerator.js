@@ -95,7 +95,6 @@ class ArticleGenerator {
     /**
      * Format the article as Markdown.
      * @returns {string} The formatted article.
-     * @private
      */
     articleFormatedMarkdown() {
         const article = this.article.join('\n\n');
