@@ -23,7 +23,6 @@ class PromptHandler {
      */
     _promptLoader(promptFileName) {
         try {
-            console.log(`${this.promptPath}/${promptFileName}`)
             const promptFile = fs.readFileSync(`${this.promptPath}/${promptFileName}`, 'utf-8');
             return promptFile;
         } catch (error) {
