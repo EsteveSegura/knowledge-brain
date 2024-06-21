@@ -1,5 +1,6 @@
-const PromptHandler = require('../utils/promptHandler');
+require("dotenv").config();
 const OpenAI = require("openai");
+const PromptHandler = require('../utils/promptHandler');
 
 /**
  * Class representing an OpenAI client.
@@ -8,10 +9,10 @@ class OpenAi {
     /**
      * Create an OpenAI client.
      * @param {Object} options - The options for the OpenAi instance.
-     * @param {string} options.apiKey - The API key for OpenAI.
+     * @param {string} [options.apiKey=process.env.OPENAI_KEY] - The API key for OpenAI.
      * @param {string} [options.model="gpt-4o"] - The model to use for OpenAI.
      */
-    constructor({apiKey = "", model = "gpt-4o"}) {
+    constructor({apiKey = process.env.OPENAI_KEY, model = "gpt-3.5-turbo"}) {
         /**
          * @type {string}
          * @private
