@@ -1,17 +1,47 @@
 const OpenAi = require("../lib/openAi");
 const fs = require('fs')
 
+/**
+ * Class representing an Article Generator.
+ */
 class ArticleGenerator {
+    /**
+     * Create an Article Generator.
+     * @param {Object} options - The options for the ArticleGenerator instance.
+     * @param {string} [options.model="gpt-3.5-turbo"] - The model to use for OpenAI.
+     * @param {Array<string>} [options.article=[]] - The initial article content.
+     * @param {Array<string>} [options.blocks=[]] - The blocks to generate the article from.
+     */
     constructor({model = "gpt-3.5-turbo", article = [], blocks = []}) {
-        // Params
+        /**
+         * @type {Array<string>}
+         * @private
+         */
         this.blocks = blocks;
+        
+        /**
+         * @type {Array<string>}
+         * @private
+         */
         this.article = article;
         
-        // OpenAI Settings
+        /**
+         * @type {string}
+         * @private
+         */
         this.model = model;
+        
+        /**
+         * @type {OpenAi}
+         * @private
+         */
         this.openAi = new OpenAi({model: this.model});
     }
 
+    /**
+     * Generate the article based on the provided blocks.
+     * @returns {Promise<Array<string>>} The generated article.
+     */
     async generateArticle() {
         // Generate initial block (title and introduction)
         const initialBlock = await this._initBlock({initialBlock: this.blocks[0]});
@@ -27,6 +57,15 @@ class ArticleGenerator {
         return this.article;
     }
 
+    /**
+     * Modify a specific block in the article.
+     * @param {Object} options - The options for modifying the block.
+     * @param {number} options.blockIndex - The index of the block to modify.
+     * @param {string} options.promptToApply - The prompt to apply.
+     * @param {string} options.rules - The rules to apply to the modification.
+     * @returns {Promise<string>} The modified block.
+     * @throws Will throw an error if the prompt is not found.
+     */
     async modifyBlock({blockIndex, promptToApply, rules}) {
         // Check if the prompt exists in our library
         const listPrompts = this.openAi.listPrompts();
@@ -53,11 +92,23 @@ class ArticleGenerator {
         return blockInference;
     }
 
+    /**
+     * Format the article as Markdown.
+     * @returns {string} The formatted article.
+     * @private
+     */
     articleFormatedMarkdown() {
         const article = this.article.join('\n\n');
-        return article
+        return article;
     }
 
+    /**
+     * Initialize the first block of the article.
+     * @param {Object} options - The options for the initial block.
+     * @param {string} options.initialBlock - The initial block content.
+     * @returns {Promise<string>} The generated initial block.
+     * @private
+     */
     async _initBlock({initialBlock}) {
         const {ARTICLE_GENERATOR_INITIAL} = this.openAi.listPrompts();
         const replacements = {
@@ -71,6 +122,13 @@ class ArticleGenerator {
         return initialBlockInference;
     }
 
+    /**
+     * Generate a block of the article.
+     * @param {Object} options - The options for the current block.
+     * @param {string} options.currentBlock - The current block content.
+     * @returns {Promise<string>} The generated block.
+     * @private
+     */
     async _runBlocks({currentBlock}) {
         const {ARTICLE_GENERATOR} = this.openAi.listPrompts();
         const replacements = {
@@ -84,7 +142,6 @@ class ArticleGenerator {
 
         return blockInference;
     }
-
 }
 
 /* Exmaple of article generaton
