@@ -1,4 +1,5 @@
-const ArticleGenerator = require('../agents/articleGenerator');
+const {ArticleGenerator} = require('../index.js');
+require('dotenv').config();
 
 // Define the model and a brief description of the blocks a.k.a sections
 const articleGenerator = new ArticleGenerator({
