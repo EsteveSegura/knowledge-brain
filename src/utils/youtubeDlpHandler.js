@@ -1,5 +1,5 @@
 const { exec } = require('child_process');
-const fs = require('fs')
+const fs = require('fs').promises;
 
 function _execCommand(command) {
     return new Promise((resolve, reject) => {
@@ -26,37 +26,23 @@ async function getVideoInfo(url) {
         
         const videoInfo = JSON.parse(output);
 
-        const title = videoInfo.fulltitle;
-        const uploader = videoInfo.uploader;
-        const duration = videoInfo.duration;
-        const categories = videoInfo.categories;
-        const viewCount = videoInfo.view_count;
-        const likeCount = videoInfo.like_count;
-        const uploadDate = videoInfo.upload_date;
-        const chapters = videoInfo.chapters;
-        const uploaderUrl = videoInfo.uploader_url;
-        const thumbnail = videoInfo.thumbnail;
-        const description = videoInfo.description;
-        const tags = videoInfo.tags;
-        const videoUrl = url
-
         return {
-            title,
-            uploader,
-            duration,
-            categories,
-            viewCount,
-            likeCount,
-            uploadDate,
-            chapters,
-            uploaderUrl,
-            thumbnail,
-            description,
-            tags,
-            videoUrl,
-        }
+            title: videoInfo.fulltitle,
+            uploader: videoInfo.uploader,
+            duration: videoInfo.duration,
+            categories: videoInfo.categories,
+            viewCount: videoInfo.view_count,
+            likeCount: videoInfo.like_count,
+            uploadDate: videoInfo.upload_date,
+            chapters: videoInfo.chapters,
+            uploaderUrl: videoInfo.uploader_url,
+            thumbnail: videoInfo.thumbnail,
+            description: videoInfo.description,
+            tags: videoInfo.tags,
+            videoUrl: url,
+        };
     } catch (error) {
-        console.error(error);
+        throw error;
     }
 }
 
@@ -65,19 +51,16 @@ async function getVideoTranscript(url) {
         const command = `yt-dlp --write-auto-subs --sub-lang en --skip-download -o "%(id)s.%(ext)s" ${url}`;
         await _execCommand(command);
         
-        // Obtener el ID del video para leer el archivo de subtítulos
         const videoId = url.split('v=')[1];
         const subtitleFile = `${videoId}.en.vtt`;
         
-        // Read the file generated and store the content in memory
-        const subtitleContent = fs.readFileSync(subtitleFile, 'utf8');
-        // Remove the file
-        fs.unlinkSync(subtitleFile);
+        const subtitleContent = await fs.readFile(subtitleFile, 'utf8');
+        await fs.unlink(subtitleFile);
         
         return subtitleContent;
     } catch (error) {
-        console.error(error);
+        throw error;
     }
 }
 
-module.exports = {getVideoInfo, getVideoTranscript}
+module.exports = { getVideoInfo, getVideoTranscript };
