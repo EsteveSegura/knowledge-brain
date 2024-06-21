@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "openai": "^4.51.0",
-    "subtitle": "^4.2.1"
+    "dotenv": "^16.4.5",
+    "openai": "^4.51.0"
   }
 }
