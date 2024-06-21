@@ -16,7 +16,6 @@ class ObsidianExtractor {
          * @private
          */
         this.folderPath = folderPath;
-        console.log(this.folderPath,'123')
     }
 
     /**
@@ -70,7 +69,6 @@ class ObsidianExtractor {
      */
     async _getMarkdownFiles() {
         try {
-            console.log(this.folderPath)
             const files = await fs.readdir(this.folderPath);
             return files.filter(file => path.extname(file) === '.md');
 
