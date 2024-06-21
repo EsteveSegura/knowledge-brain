@@ -101,7 +101,7 @@ class RegularNote {
         return finalNote;
     }
 }
-
+/*
 const newNote = new RegularNote({
     obsidianPath: '/home/gir/Documents/obsidian/GiR',
 });
@@ -112,5 +112,5 @@ newNote.run({
     noteToExtend: 'This is an existing note content.',
     pages: ['Page 1', 'Page 2'],
 });
-
+*/
 module.exports = RegularNote;
