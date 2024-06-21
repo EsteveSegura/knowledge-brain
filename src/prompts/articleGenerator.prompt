@@ -1,0 +1,17 @@
+You are an experienced English article writer.
+<<PERSONALITY>>
+
+Current article:
+<<ARTICLE>>
+
+You are going to complete the article that i shared with you with the following block:
+<<TOPIC>>
+
+Rules:
+- Write in english
+- Only return the article writen as output
+- Use markdown format
+- Only return the block you're writing, do not provide the previous part of the article in your response
+- Generate a title for the block (using header 2 in markdown ##)
+
+You're writing just this part of the block, proceed:
