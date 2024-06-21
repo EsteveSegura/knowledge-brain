@@ -17,7 +17,7 @@ class PromptHandler {
 
     /**
      * Load the content of a prompt file.
-     * @param {string} promptFileName - The path to the prompt file.
+     * @param {string} promptFileName - The name of the prompt file.
      * @returns {string} The content of the prompt file.
      * @private
      */
@@ -32,7 +32,7 @@ class PromptHandler {
 
     /**
      * Process a prompt template with replacements.
-     * @param {string} file - The path to the prompt template file.
+     * @param {string} fileName - The path to the prompt template file.
      * @param {Object} replacements - The replacements for the template placeholders.
      * @returns {string} The processed prompt with replacements.
      */
