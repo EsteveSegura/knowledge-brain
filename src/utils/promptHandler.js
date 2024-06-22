@@ -14,7 +14,12 @@ class PromptHandler {
          * @type {string}
          * @private
          */
-        this.promptPath = promptPath || path.join(__dirname, 'prompts');
+        this.promptPath = promptPath || path.join(__dirname, '../prompts');
+        
+        // Verifica si el directorio existe
+        if (!fs.existsSync(this.promptPath)) {
+            throw new Error(`Prompt directory does not exist: ${this.promptPath}`);
+        }
     }
 
     /**
@@ -50,7 +55,7 @@ class PromptHandler {
 
     /**
      * List all the prompts available.
-     * @returns {Array<string>} The list of prompts.
+     * @returns {Object} The list of prompts.
      */
     listPrompts() {
         try {
