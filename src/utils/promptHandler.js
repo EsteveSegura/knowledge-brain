@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 /**
  * Class representing a Prompt Handler.
@@ -6,13 +7,14 @@ const fs = require('fs');
 class PromptHandler {
     /**
      * Create a Prompt Handler.
+     * @param {string} [promptPath] - Optional custom path for prompts.
      */
-    constructor() {
+    constructor(promptPath) {
         /**
          * @type {string}
          * @private
          */
-        this.promptPath = './src/prompts';
+        this.promptPath = promptPath || path.join(__dirname, 'prompts');
     }
 
     /**
@@ -23,7 +25,7 @@ class PromptHandler {
      */
     _promptLoader(promptFileName) {
         try {
-            const promptFile = fs.readFileSync(`${this.promptPath}/${promptFileName}`, 'utf-8');
+            const promptFile = fs.readFileSync(path.join(this.promptPath, promptFileName), 'utf-8');
             return promptFile;
         } catch (error) {
             throw new Error(`Error loading prompt file: ${error.message}`);
@@ -51,19 +53,23 @@ class PromptHandler {
      * @returns {Array<string>} The list of prompts.
      */
     listPrompts() {
-        const promptsPaths = fs.readdirSync(this.promptPath);
+        try {
+            const promptsPaths = fs.readdirSync(this.promptPath);
 
-        // Convert prompts to Object
-        // key: prompt name in capital letters and converting camelCase to snake_case
-        // value: namefile of the prompt
-        const prompts = promptsPaths.reduce((acc, prompt) => {
-            const promptName = prompt
-            const promptKey = promptName.replace(/([a-z])([A-Z])/g, '$1_$2').toUpperCase().replace('.PROMPT', '');
-            acc[promptKey] = promptName;
-            return acc;
-        }, {});
-        
-        return prompts;
+            // Convert prompts to Object
+            // key: prompt name in capital letters and converting camelCase to snake_case
+            // value: namefile of the prompt
+            const prompts = promptsPaths.reduce((acc, prompt) => {
+                const promptName = prompt;
+                const promptKey = promptName.replace(/([a-z])([A-Z])/g, '$1_$2').toUpperCase().replace('.PROMPT', '');
+                acc[promptKey] = promptName;
+                return acc;
+            }, {});
+
+            return prompts;
+        } catch (error) {
+            throw new Error(`Error listing prompt files: ${error.message}`);
+        }
     }
 }
 
