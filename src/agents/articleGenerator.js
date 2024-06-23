@@ -1,5 +1,4 @@
 const OpenAi = require("../lib/openAi");
-const fs = require('fs')
 
 /**
  * Class representing an Article Generator.
@@ -8,11 +7,12 @@ class ArticleGenerator {
     /**
      * Create an Article Generator.
      * @param {Object} options - The options for the ArticleGenerator instance.
+     * @param {string} [options.openAiKey=null] - The API key for OpenAI.
      * @param {string} [options.model="gpt-3.5-turbo"] - The model to use for OpenAI.
      * @param {Array<string>} [options.article=[]] - The initial article content.
      * @param {Array<string>} [options.blocks=[]] - The blocks to generate the article from.
      */
-    constructor({model = "gpt-3.5-turbo", article = [], blocks = []}) {
+    constructor({openAiKey = null, model = "gpt-3.5-turbo", article = [], blocks = []}) {
         /**
          * @type {Array<string>}
          * @private
@@ -35,7 +35,7 @@ class ArticleGenerator {
          * @type {OpenAi}
          * @private
          */
-        this.openAi = new OpenAi({model: this.model});
+        this.openAi = new OpenAi({model: this.model, apiKey: openAiKey});
     }
 
     /**
